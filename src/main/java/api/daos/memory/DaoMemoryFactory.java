@@ -3,7 +3,7 @@ package api.daos.memory;
 import api.daos.DaoFactory;
 import api.daos.EmpleadoDao;
 
-public class DaoFactoryMemory extends DaoFactory {
+public class DaoMemoryFactory extends DaoFactory {
 
     private EmpleadoDao empleadoDao;
 
