@@ -1,4 +1,4 @@
-package entities;
+package api.entities;
 
 public enum Cocina {
     PIZZERIA,
