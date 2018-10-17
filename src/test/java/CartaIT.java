@@ -16,13 +16,14 @@ class CartaIT {
 
     @Test
     void testRecuperarCarta() {
+        HttpRequest.builder(CartaApiController.CARTAS).post();
         Carta carta = new Carta();
         carta.setNombre("Carta menu de Restaurante...");
         carta.setValidezDesde(LocalDateTime.now());
         DaoFactory.getFactory().getCartaDao().save(carta);
         String id = carta.getId();
 
-        HttpRequest request = HttpRequest.builder(CartaApiController.CARTAS).body(id).post();
+        HttpRequest request = HttpRequest.builder(CartaApiController.CARTAS).expandPath(CartaApiController.ID_ID).path(id).get();
         HttpResponse response = new Client().submit(request);
         CartaDto cartaDto = (CartaDto) response.getBody();
         assertEquals(carta.getNombre(), cartaDto.getNombre());
