@@ -33,6 +33,12 @@ public class RestauranteApiController {
         this.restauranteBusinessController.createCarta(idRestaurante, nombreCarta);
     }
 
+    public void addNewEmpleadoToRestaurante(String idRestaurante, String nombreEmpleado) {
+        this.validate(idRestaurante, "idRestaurante");
+        this.validate(nombreEmpleado, "EmpleadoDto nombre");
+        this.restauranteBusinessController.addNewEmpleadoToRestaurante(idRestaurante, nombreEmpleado);
+    }
+
     private void validate(Object property, String message) {
         if (property == null) {
             throw new ArgumentNotValidException(message + " is missing");
