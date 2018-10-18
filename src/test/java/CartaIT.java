@@ -1,14 +1,16 @@
 import api.apiControllers.CartaApiController;
 import api.dtos.CartaDto;
-import api.entities.Carta;
 import http.Client;
 import http.HttpRequest;
 import http.HttpResponse;
+import http.HttpStatus;
+import http.HttpException;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDateTime;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class CartaIT {
 
@@ -31,6 +33,12 @@ class CartaIT {
     private void actualizarParcialmenteCartaAPIRest(String id, CartaDto cartaDto) {
         HttpRequest request = HttpRequest.builder(CartaApiController.CARTAS).path(CartaApiController.ID_ID)
                 .expandPath(id).body(cartaDto).patch();
+        new Client().submit(request);
+    }
+
+    private void borrarCartaAPIRest(String id) {
+        HttpRequest request = HttpRequest.builder(CartaApiController.CARTAS).path(CartaApiController.ID_ID)
+                .expandPath(id).body(null).delete();
         new Client().submit(request);
     }
 
@@ -58,4 +66,15 @@ class CartaIT {
         assertEquals(fecha, cartaDto.getValidezDesde());
     }
 
+    @Test
+    void testBorrarCarta() {
+        String nombre = "Carta para borrar";
+        LocalDateTime fecha = LocalDateTime.now();
+        String id = this.crearCartaAPIRest(nombre, fecha);
+        this.borrarCartaAPIRest(id);
+        HttpRequest request = HttpRequest.builder(CartaApiController.CARTAS).path(CartaApiController.ID_ID)
+                .expandPath(id).body(null).get();
+        HttpException exception = assertThrows(HttpException.class, () -> new Client().submit(request));
+        assertEquals(HttpStatus.NOT_FOUND, exception.getHttpStatus());
+    }
 }

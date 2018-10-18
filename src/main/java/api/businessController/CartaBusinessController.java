@@ -27,4 +27,8 @@ public class CartaBusinessController {
         carta.setValidezDesde(cartaDto.getValidezDesde());
         DaoFactory.getFactory().getCartaDao().save(carta);
     }
+
+    public void delete(String id) {
+        DaoFactory.getFactory().getCartaDao().deleteById(id);
+    }
 }

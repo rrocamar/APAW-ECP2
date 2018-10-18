@@ -40,6 +40,9 @@ public class Dispatcher {
                 case PATCH:
                     this.doPatch(request);
                     break;
+                case DELETE:
+                    this.doDelete(request);
+                    break;
                 default: // Unexpected
                     throw new RequestInvalidException("method error: " + request.getMethod());
 
@@ -94,4 +97,11 @@ public class Dispatcher {
         }
     }
 
+    private void doDelete(HttpRequest request) {
+        if (request.isEqualsPath(CartaApiController.CARTAS + CartaApiController.ID_ID)) {
+            this.cartaApiController.delete(request.getPath(1));
+        } else {
+            throw new RequestInvalidException("request error: " + request.getMethod() + ' ' + request.getPath());
+        }
+    }
 }
