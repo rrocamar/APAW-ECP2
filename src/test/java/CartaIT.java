@@ -1,8 +1,5 @@
-
 import api.apiControllers.CartaApiController;
-import api.daos.DaoFactory;
 import api.dtos.CartaDto;
-import api.entities.Carta;
 import http.Client;
 import http.HttpRequest;
 import http.HttpResponse;
