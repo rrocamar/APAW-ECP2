@@ -20,6 +20,16 @@ public class RestauranteBusinessController {
         return restaurante.getId();
     }
 
+    public void createCarta(String idRestaurante, String nombreCarta) {
+        Restaurante restaurante = DaoFactory.getFactory().getRestauranteDao().read(idRestaurante)
+                .orElseThrow(() -> new NotFoundException("Restaurante (" + idRestaurante + ")"));
+        Carta carta = new Carta();
+        carta.setNombre(nombreCarta);
+        DaoFactory.getFactory().getCartaDao().save(carta);
+        restaurante.setCarta(carta);
+        DaoFactory.getFactory().getRestauranteDao().save(restaurante);
+    }
+
     public RestauranteDto read(String id) {
         return new RestauranteDto(DaoFactory.getFactory().getRestauranteDao().read(id)
                 .orElseThrow(() -> new NotFoundException("Restaurante (" + id + ")")));

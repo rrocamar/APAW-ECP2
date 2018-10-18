@@ -12,6 +12,7 @@ import org.junit.jupiter.api.Test;
 import java.time.LocalDateTime;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNull;
 
 class RestauranteIT {
@@ -43,6 +44,12 @@ class RestauranteIT {
         return (String) response.getBody();
     }
 
+    private void asignarCartaARestauranteAPIRest(String idRestaurante, String nombreCarta) {
+        HttpRequest request = HttpRequest.builder(RestauranteApiController.RESTAURANTES).path(RestauranteApiController.ID_ID)
+                .expandPath(idRestaurante).path(RestauranteApiController.CARTA).body(nombreCarta).post();
+        new Client().submit(request);
+    }
+
     @Test
     void testCrearRecuperar() {
         String nombre = "Restaurante Uuno";
@@ -64,5 +71,16 @@ class RestauranteIT {
         assertEquals(Cocina.HAMBURGUESERIA, restauranteDto.getTipo());
         assertEquals(idCarta, restauranteDto.getIdCarta());
         assertNull(restauranteDto.getDireccion());
+    }
+
+    @Test
+    void testAsignarCartaARestaurante() {
+        String nombre = "Restaurante Tres";
+        String id = this.crearRestauranteAPIRest(nombre, null, Cocina.PIZZERIA, null);
+        RestauranteDto restauranteDto = this.obtenerRestauranteAPIRest(id);
+        assertNull(restauranteDto.getIdCarta());
+        this.asignarCartaARestauranteAPIRest(id, "Mi nueva carta");
+        restauranteDto = this.obtenerRestauranteAPIRest(id);
+        assertNotNull(restauranteDto.getIdCarta());
     }
 }

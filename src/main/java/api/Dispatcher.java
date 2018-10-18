@@ -72,6 +72,8 @@ public class Dispatcher {
             response.setBody(this.cartaApiController.create((CartaDto) request.getBody()));
         } else if (request.isEqualsPath(RestauranteApiController.RESTAURANTES)) {
             response.setBody(this.restauranteApiController.create((RestauranteDto) request.getBody()));
+        } else if (request.isEqualsPath(RestauranteApiController.RESTAURANTES + RestauranteApiController.ID_ID + RestauranteApiController.CARTA)) {
+            this.restauranteApiController.createCarta((String) request.getPath(1), (String) request.getBody());
         } else {
             throw new RuntimeException("request error: " + request.getMethod() + ' ' + request.getPath());
         }
