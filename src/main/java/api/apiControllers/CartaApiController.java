@@ -23,6 +23,19 @@ public class CartaApiController {
         return this.cartaBusinessController.create(cartaDto);
     }
 
+    public void update(String id, CartaDto cartaDto) {
+        this.validate(id, "identifier Carta");
+        this.validate(cartaDto, "cartaDto");
+        this.validate(cartaDto.getNombre(), "CartaDto nombre");
+        this.validate(cartaDto.getValidezDesde(), "CartaDto fechaValidez");
+        this.cartaBusinessController.update(id, cartaDto);
+    }
+
+    public void delete(String id) {
+        this.validate(id, "identifier Carta");
+        this.cartaBusinessController.delete(id);
+    }
+
     private void validate(Object property, String message) {
         if (property == null) {
             throw new ArgumentNotValidException(message + " is missing");

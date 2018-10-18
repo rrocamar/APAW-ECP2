@@ -6,6 +6,7 @@ import api.daos.DaoFactory;
 import api.daos.memory.DaoMemoryFactory;
 import api.dtos.CartaDto;
 import api.dtos.EmpleadoDto;
+import api.entities.Carta;
 import api.exceptions.ArgumentNotValidException;
 import api.exceptions.NotFoundException;
 import api.exceptions.RequestInvalidException;
@@ -35,6 +36,12 @@ public class Dispatcher {
                     break;
                 case PUT:
                     this.doPut(request);
+                    break;
+                case PATCH:
+                    this.doPatch(request);
+                    break;
+                case DELETE:
+                    this.doDelete(request);
                     break;
                 default: // Unexpected
                     throw new RequestInvalidException("method error: " + request.getMethod());
@@ -82,4 +89,19 @@ public class Dispatcher {
         }
     }
 
+    private void doPatch(HttpRequest request) {
+        if (request.isEqualsPath(CartaApiController.CARTAS + CartaApiController.ID_ID)) {
+            this.cartaApiController.update(request.getPath(1), (CartaDto) request.getBody());
+        } else {
+            throw new RequestInvalidException("request error: " + request.getMethod() + ' ' + request.getPath());
+        }
+    }
+
+    private void doDelete(HttpRequest request) {
+        if (request.isEqualsPath(CartaApiController.CARTAS + CartaApiController.ID_ID)) {
+            this.cartaApiController.delete(request.getPath(1));
+        } else {
+            throw new RequestInvalidException("request error: " + request.getMethod() + ' ' + request.getPath());
+        }
+    }
 }
