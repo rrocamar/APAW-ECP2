@@ -12,10 +12,20 @@ public class EmpleadoApiController {
 
     private EmpleadoBusinessController empleadoBusinessController = new EmpleadoBusinessController();
 
+    public EmpleadoDto read(String id) {
+        return this.empleadoBusinessController.read(id);
+    }
+
     public String create(EmpleadoDto empleadoDto) {
         this.validate(empleadoDto, "empleadoDto");
         this.validate(empleadoDto.getNombre(), "EmpleadoDto nombre");
         return this.empleadoBusinessController.create(empleadoDto);
+    }
+
+    public void update(String id, EmpleadoDto empleadoDto) {
+        this.validate(empleadoDto, "empleadoDto");
+        this.validate(empleadoDto.getNombre(), "EmpleadoDto nombre");
+        this.empleadoBusinessController.update(id, empleadoDto);
     }
 
     private void validate(Object property, String message) {

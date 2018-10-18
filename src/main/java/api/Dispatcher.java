@@ -33,6 +33,9 @@ public class Dispatcher {
                 case GET:
                     this.doGet(request, response);
                     break;
+                case PUT:
+                    this.doPut(request);
+                    break;
                 default: // Unexpected
                     throw new RequestInvalidException("method error: " + request.getMethod());
 
@@ -64,8 +67,19 @@ public class Dispatcher {
     private void doGet(HttpRequest request, HttpResponse response) {
         if (request.isEqualsPath(CartaApiController.CARTAS + CartaApiController.ID_ID)) {
             response.setBody(this.cartaApiController.read((String) request.getPath(1)));
+        } else if (request.isEqualsPath(EmpleadoApiController.EMPLEADOS + EmpleadoApiController.ID_ID)) {
+            response.setBody(this.empleadoApiController.read((String) request.getPath(1)));
         } else {
             throw new RuntimeException("request error: " + request.getMethod() + ' ' + request.getPath());
         }
     }
+
+    private void doPut(HttpRequest request) {
+        if (request.isEqualsPath(EmpleadoApiController.EMPLEADOS + EmpleadoApiController.ID_ID)) {
+            this.empleadoApiController.update(request.getPath(1), (EmpleadoDto) request.getBody());
+        } else {
+            throw new RequestInvalidException("request error: " + request.getMethod() + ' ' + request.getPath());
+        }
+    }
+
 }
