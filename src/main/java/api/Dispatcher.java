@@ -73,7 +73,9 @@ public class Dispatcher {
         } else if (request.isEqualsPath(RestauranteApiController.RESTAURANTES)) {
             response.setBody(this.restauranteApiController.create((RestauranteDto) request.getBody()));
         } else if (request.isEqualsPath(RestauranteApiController.RESTAURANTES + RestauranteApiController.ID_ID + RestauranteApiController.CARTA)) {
-            this.restauranteApiController.createCarta((String) request.getPath(1), (String) request.getBody());
+            this.restauranteApiController.createCarta(request.getPath(1), (String) request.getBody());
+        } else if (request.isEqualsPath(RestauranteApiController.RESTAURANTES + RestauranteApiController.ID_ID + RestauranteApiController.EMPLEADOS)) {
+            this.restauranteApiController.addNewEmpleadoToRestaurante(request.getPath(1), (String) request.getBody());
         } else {
             throw new RuntimeException("request error: " + request.getMethod() + ' ' + request.getPath());
         }
@@ -82,11 +84,11 @@ public class Dispatcher {
 
     private void doGet(HttpRequest request, HttpResponse response) {
         if (request.isEqualsPath(CartaApiController.CARTAS + CartaApiController.ID_ID)) {
-            response.setBody(this.cartaApiController.read((String) request.getPath(1)));
+            response.setBody(this.cartaApiController.read(request.getPath(1)));
         } else if (request.isEqualsPath(EmpleadoApiController.EMPLEADOS + EmpleadoApiController.ID_ID)) {
-            response.setBody(this.empleadoApiController.read((String) request.getPath(1)));
+            response.setBody(this.empleadoApiController.read(request.getPath(1)));
         } else if (request.isEqualsPath(RestauranteApiController.RESTAURANTES + RestauranteApiController.ID_ID)) {
-            response.setBody(this.restauranteApiController.read((String) request.getPath(1)));
+            response.setBody(this.restauranteApiController.read(request.getPath(1)));
         } else {
             throw new RuntimeException("request error: " + request.getMethod() + ' ' + request.getPath());
         }

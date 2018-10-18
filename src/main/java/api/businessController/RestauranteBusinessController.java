@@ -3,6 +3,7 @@ package api.businessController;
 import api.daos.DaoFactory;
 import api.dtos.RestauranteDto;
 import api.entities.Carta;
+import api.entities.Empleado;
 import api.entities.Restaurante;
 import api.exceptions.NotFoundException;
 
@@ -27,6 +28,16 @@ public class RestauranteBusinessController {
         carta.setNombre(nombreCarta);
         DaoFactory.getFactory().getCartaDao().save(carta);
         restaurante.setCarta(carta);
+        DaoFactory.getFactory().getRestauranteDao().save(restaurante);
+    }
+
+    public void addNewEmpleadoToRestaurante(String idRestaurante, String nombreEmpleado) {
+        Restaurante restaurante = DaoFactory.getFactory().getRestauranteDao().read(idRestaurante)
+                .orElseThrow(() -> new NotFoundException("Restaurante (" + idRestaurante + ")"));
+        Empleado empleado = new Empleado();
+        empleado.setNombre(nombreEmpleado);
+        DaoFactory.getFactory().getEmpleadoDao().save(empleado);
+        restaurante.getEmpleados().add(empleado);
         DaoFactory.getFactory().getRestauranteDao().save(restaurante);
     }
 

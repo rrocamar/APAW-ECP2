@@ -1,7 +1,11 @@
 package api.dtos;
 
 import api.entities.Cocina;
+import api.entities.Empleado;
 import api.entities.Restaurante;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class RestauranteDto {
 
@@ -15,16 +19,22 @@ public class RestauranteDto {
 
     private String idCarta;
 
+    private List<String> idsEmpleados;
+
     public RestauranteDto() {
+        this.idsEmpleados = new ArrayList<>();
     }
 
     public RestauranteDto(Restaurante restaurante) {
+        this();
         this.id = restaurante.getId();
         this.nombre = restaurante.getNombre();
         this.direccion = restaurante.getDireccion();
         this.tipo = restaurante.getTipo();
         if (restaurante.getCarta() != null)
             this.idCarta = restaurante.getCarta().getId();
+        for (Empleado empleado : restaurante.getEmpleados())
+            getIdsEmpleados().add(empleado.getId());
     }
 
     public String getId() {
@@ -65,5 +75,9 @@ public class RestauranteDto {
 
     public void setIdCarta(String idCarta) {
         this.idCarta = idCarta;
+    }
+
+    public List<String> getIdsEmpleados() {
+        return idsEmpleados;
     }
 }

@@ -67,6 +67,10 @@ public class Restaurante {
         this.carta = carta;
     }
 
+    public List<Empleado> getEmpleados() {
+        return this.empleados;
+    }
+
     public static Builder builder(String nombre) {
         return new Builder(nombre);
     }
