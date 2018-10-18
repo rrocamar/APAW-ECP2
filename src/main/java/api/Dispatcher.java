@@ -53,12 +53,12 @@ public class Dispatcher {
     private void doPost(HttpRequest request, HttpResponse response) {
         if (request.isEqualsPath(EmpleadoApiController.EMPLEADOS)) {
             response.setBody(this.empleadoApiController.create((EmpleadoDto) request.getBody()));
-        }
-        if (request.isEqualsPath(CartaApiController.CARTAS))
+        } else if (request.isEqualsPath(CartaApiController.CARTAS))
             response.setBody(this.cartaApiController.create((CartaDto) request.getBody()));
         else {
             throw new RuntimeException("request error: " + request.getMethod() + ' ' + request.getPath());
         }
+
     }
 
     private void doGet(HttpRequest request, HttpResponse response) {
