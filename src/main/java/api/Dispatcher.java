@@ -62,8 +62,8 @@ public class Dispatcher {
     }
 
     private void doGet(HttpRequest request, HttpResponse response) {
-        if (request.isEqualsPath(CartaApiController.CARTAS)) {
-            response.setBody(this.cartaApiController.read((String) request.getBody()));
+        if (request.isEqualsPath(CartaApiController.CARTAS + CartaApiController.ID_ID)) {
+            response.setBody(this.cartaApiController.read((String) request.getPath(1)));
         } else {
             throw new RuntimeException("request error: " + request.getMethod() + ' ' + request.getPath());
         }
