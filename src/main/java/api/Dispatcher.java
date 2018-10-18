@@ -4,6 +4,7 @@ import api.apiControllers.CartaApiController;
 import api.apiControllers.EmpleadoApiController;
 import api.daos.DaoFactory;
 import api.daos.memory.DaoMemoryFactory;
+import api.dtos.CartaDto;
 import api.dtos.EmpleadoDto;
 import api.exceptions.ArgumentNotValidException;
 import api.exceptions.NotFoundException;
@@ -52,7 +53,10 @@ public class Dispatcher {
     private void doPost(HttpRequest request, HttpResponse response) {
         if (request.isEqualsPath(EmpleadoApiController.EMPLEADOS)) {
             response.setBody(this.empleadoApiController.create((EmpleadoDto) request.getBody()));
-        } else {
+        }
+        if (request.isEqualsPath(CartaApiController.CARTAS))
+            response.setBody(this.cartaApiController.create((CartaDto) request.getBody()));
+        else {
             throw new RuntimeException("request error: " + request.getMethod() + ' ' + request.getPath());
         }
     }
