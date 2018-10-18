@@ -83,6 +83,8 @@ public class Dispatcher {
             response.setBody(this.cartaApiController.read((String) request.getPath(1)));
         } else if (request.isEqualsPath(EmpleadoApiController.EMPLEADOS + EmpleadoApiController.ID_ID)) {
             response.setBody(this.empleadoApiController.read((String) request.getPath(1)));
+        } else if (request.isEqualsPath(RestauranteApiController.RESTAURANTES + RestauranteApiController.ID_ID)) {
+            response.setBody(this.restauranteApiController.read((String) request.getPath(1)));
         } else {
             throw new RuntimeException("request error: " + request.getMethod() + ' ' + request.getPath());
         }

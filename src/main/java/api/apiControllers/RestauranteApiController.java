@@ -19,6 +19,10 @@ public class RestauranteApiController {
         return this.restauranteBusinessController.create(restauranteDto);
     }
 
+    public RestauranteDto read(String id) {
+        return this.restauranteBusinessController.read(id);
+    }
+
     private void validate(Object property, String message) {
         if (property == null) {
             throw new ArgumentNotValidException(message + " is missing");

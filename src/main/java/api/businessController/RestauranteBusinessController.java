@@ -19,4 +19,9 @@ public class RestauranteBusinessController {
         DaoFactory.getFactory().getRestauranteDao().save(restaurante);
         return restaurante.getId();
     }
+
+    public RestauranteDto read(String id) {
+        return new RestauranteDto(DaoFactory.getFactory().getRestauranteDao().read(id)
+                .orElseThrow(() -> new NotFoundException("Restaurante (" + id + ")")));
+    }
 }
