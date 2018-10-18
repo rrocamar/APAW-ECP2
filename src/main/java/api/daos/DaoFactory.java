@@ -19,4 +19,6 @@ public abstract class DaoFactory {
     public abstract EmpleadoDao getEmpleadoDao();
 
     public abstract CartaDao getCartaDao();
+
+    public abstract RestauranteDao getRestauranteDao();
 }

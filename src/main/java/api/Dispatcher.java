@@ -2,11 +2,14 @@ package api;
 
 import api.apiControllers.CartaApiController;
 import api.apiControllers.EmpleadoApiController;
+import api.apiControllers.RestauranteApiController;
 import api.daos.DaoFactory;
 import api.daos.memory.DaoMemoryFactory;
 import api.dtos.CartaDto;
 import api.dtos.EmpleadoDto;
+import api.dtos.RestauranteDto;
 import api.entities.Carta;
+import api.entities.Restaurante;
 import api.exceptions.ArgumentNotValidException;
 import api.exceptions.NotFoundException;
 import api.exceptions.RequestInvalidException;
@@ -23,6 +26,8 @@ public class Dispatcher {
     private EmpleadoApiController empleadoApiController = new EmpleadoApiController();
 
     private CartaApiController cartaApiController = new CartaApiController();
+
+    private RestauranteApiController restauranteApiController = new RestauranteApiController();
 
     public void submit(HttpRequest request, HttpResponse response) {
         String ERROR_MESSAGE = "{'error':'%S'}";
@@ -63,9 +68,11 @@ public class Dispatcher {
     private void doPost(HttpRequest request, HttpResponse response) {
         if (request.isEqualsPath(EmpleadoApiController.EMPLEADOS)) {
             response.setBody(this.empleadoApiController.create((EmpleadoDto) request.getBody()));
-        } else if (request.isEqualsPath(CartaApiController.CARTAS))
+        } else if (request.isEqualsPath(CartaApiController.CARTAS)) {
             response.setBody(this.cartaApiController.create((CartaDto) request.getBody()));
-        else {
+        } else if (request.isEqualsPath(RestauranteApiController.RESTAURANTES)) {
+            response.setBody(this.restauranteApiController.create((RestauranteDto) request.getBody()));
+        } else {
             throw new RuntimeException("request error: " + request.getMethod() + ' ' + request.getPath());
         }
 
@@ -76,6 +83,8 @@ public class Dispatcher {
             response.setBody(this.cartaApiController.read((String) request.getPath(1)));
         } else if (request.isEqualsPath(EmpleadoApiController.EMPLEADOS + EmpleadoApiController.ID_ID)) {
             response.setBody(this.empleadoApiController.read((String) request.getPath(1)));
+        } else if (request.isEqualsPath(RestauranteApiController.RESTAURANTES + RestauranteApiController.ID_ID)) {
+            response.setBody(this.restauranteApiController.read((String) request.getPath(1)));
         } else {
             throw new RuntimeException("request error: " + request.getMethod() + ' ' + request.getPath());
         }
