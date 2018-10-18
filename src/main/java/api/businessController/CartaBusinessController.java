@@ -19,4 +19,12 @@ public class CartaBusinessController {
         DaoFactory.getFactory().getCartaDao().save(carta);
         return carta.getId();
     }
+
+    public void update(String id, CartaDto cartaDto) {
+        Carta carta = DaoFactory.getFactory().getCartaDao().read(id)
+                .orElseThrow(() -> new NotFoundException("Carta (" + id + ")"));
+        carta.setNombre(cartaDto.getNombre());
+        carta.setValidezDesde(cartaDto.getValidezDesde());
+        DaoFactory.getFactory().getCartaDao().save(carta);
+    }
 }
