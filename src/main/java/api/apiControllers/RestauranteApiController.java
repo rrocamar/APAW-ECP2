@@ -11,6 +11,10 @@ public class RestauranteApiController {
 
     public static final String ID_ID = "/{id}";
 
+    public static final String EMPLEADOS = "/empleados";
+
+    public static final String CARTA = "/carta";
+
     private RestauranteBusinessController restauranteBusinessController = new RestauranteBusinessController();
 
     public String create(RestauranteDto restauranteDto) {
@@ -21,6 +25,12 @@ public class RestauranteApiController {
 
     public RestauranteDto read(String id) {
         return this.restauranteBusinessController.read(id);
+    }
+
+    public void createCarta(String idRestaurante, String nombreCarta) {
+        this.validate(idRestaurante, "idRestaurante");
+        this.validate(nombreCarta, "CartaDto nombre");
+        this.restauranteBusinessController.createCarta(idRestaurante, nombreCarta);
     }
 
     private void validate(Object property, String message) {
