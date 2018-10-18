@@ -11,7 +11,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class CartaIT {
 
-    private String cearTema(String nombre, LocalDateTime fecha) {
+    private String cearCarta(String nombre, LocalDateTime fecha) {
         CartaDto cartaDto = new CartaDto();
         cartaDto.setNombre(nombre);
         cartaDto.setValidezDesde(fecha);
@@ -24,7 +24,7 @@ class CartaIT {
     void testRecuperarCarta() {
         String nombre = "Carta menu de Restaurante...";
         LocalDateTime fecha = LocalDateTime.now();
-        String id = this.cearTema(nombre, fecha);
+        String id = this.cearCarta(nombre, fecha);
         HttpRequest request = HttpRequest.builder(CartaApiController.CARTAS).path(CartaApiController.ID_ID)
                 .expandPath(id).body(null).get();
         HttpResponse response = new Client().submit(request);
