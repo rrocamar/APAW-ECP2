@@ -89,7 +89,22 @@ Este es el desarrollo de la segunda práctica de Patrones de Diseño, correspond
 - 403 BAD_REQUEST
 - 404 NOT_FOUND
 ---
-
+### POST /restaurantes/{id}/carta
+#### Parámetros del cuerpo
+- `nombre`: String (**requerido**)
+#### Respuesta
+- 200 OK
+- 403 BAD_REQUEST
+- 404 NOT_FOUND
+---
+### POST /restaurantes/{id}/empleado
+#### Parámetros del cuerpo
+- `nombre`: String (**requerido**)
+#### Respuesta
+- 200 OK
+- 403 BAD_REQUEST
+- 404 NOT_FOUND
+---
 ### Tecnologías utilizadas
 * Java
 * Maven

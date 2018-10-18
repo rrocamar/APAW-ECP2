@@ -23,6 +23,8 @@ public class RestauranteDto {
         this.nombre = restaurante.getNombre();
         this.direccion = restaurante.getDireccion();
         this.tipo = restaurante.getTipo();
+        if (restaurante.getCarta() != null)
+            this.idCarta = restaurante.getCarta().getId();
     }
 
     public String getId() {
