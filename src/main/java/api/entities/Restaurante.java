@@ -22,9 +22,8 @@ public class Restaurante {
         this.carta = new Carta();
     }
 
-    public Restaurante(String id, String nombre) {
+    public Restaurante(String nombre) {
         this();
-        this.id = id;
         this.nombre = nombre;
     }
 
@@ -60,20 +59,33 @@ public class Restaurante {
         this.tipo = tipo;
     }
 
-    public static Builder builder(String id, String nombre) {
-        return new Builder(id, nombre);
+    public Carta getCarta() {
+        return carta;
+    }
+
+    public void setCarta(Carta carta) {
+        this.carta = carta;
+    }
+
+    public static Builder builder(String nombre) {
+        return new Builder(nombre);
     }
 
     public static class Builder {
 
         private Restaurante restaurante;
 
-        private Builder(String id, String nombre) {
-            this.restaurante = new Restaurante(id, nombre);
+        private Builder(String nombre) {
+            this.restaurante = new Restaurante(nombre);
         }
 
         public Builder nombre(String nombre) {
             this.restaurante.setNombre(nombre);
+            return this;
+        }
+
+        public Builder id(String id) {
+            this.restaurante.setId(id);
             return this;
         }
 
@@ -87,6 +99,10 @@ public class Restaurante {
             return this;
         }
 
+        public Builder carta(Carta carta) {
+            this.restaurante.setCarta(carta);
+            return this;
+        }
         public Restaurante build() {
             return this.restaurante;
         }

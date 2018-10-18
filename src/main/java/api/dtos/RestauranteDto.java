@@ -13,6 +13,8 @@ public class RestauranteDto {
 
     private Cocina tipo;
 
+    private String idCarta;
+
     public RestauranteDto() {
     }
 
@@ -53,5 +55,13 @@ public class RestauranteDto {
 
     public void setTipo(Cocina tipo) {
         this.tipo = tipo;
+    }
+
+    public String getIdCarta() {
+        return idCarta;
+    }
+
+    public void setIdCarta(String idCarta) {
+        this.idCarta = idCarta;
     }
 }
