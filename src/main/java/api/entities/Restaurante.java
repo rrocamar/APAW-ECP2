@@ -28,6 +28,10 @@ public class Restaurante {
         return id;
     }
 
+    public void setId(String id) {
+        this.id = id;
+    }
+
     public String getNombre() {
         return nombre;
     }
