@@ -4,19 +4,6 @@
 
 # Descripción
 Este es el desarrollo de la segunda práctica de Patrones de Diseño, correspondiente a la asignatura *Arquitectura y Patrones para Aplicaciones Web*.
-# Elaboración de entidades
-
-
-### Tecnologías utilizadas
-* Java
-* Maven
-* IntelliJ
-* GitHub
-* Travis
-* Sonar
-
-[![Build Status](https://travis-ci.org/rrocamar/APAW-ECP2-RamonRoca.svg?branch=develop)](https://travis-ci.org/rrocamar/APAW-ECP2-RamonRoca)
-
 
 ## Diseño de entidades
 ![themes-architecture-diagram](https://github.com/rrocamar/APAW-ECP2-RamonRoca/blob/develop/docs/DiagramaDeClases.png)
@@ -96,4 +83,15 @@ Este es el desarrollo de la segunda práctica de Patrones de Diseño, correspond
 - 403 BAD_REQUEST
 - 404 NOT_FOUND
 ---
+
+### Tecnologías utilizadas
+* Java
+* Maven
+* IntelliJ
+* GitHub
+* Travis
+* Sonar
+
+[![Build Status](https://travis-ci.org/rrocamar/APAW-ECP2-RamonRoca.svg?branch=develop)](https://travis-ci.org/rrocamar/APAW-ECP2-RamonRoca)
+
 ##### Autor: Ramón Roca Martínez
