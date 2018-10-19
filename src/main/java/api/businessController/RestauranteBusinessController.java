@@ -1,11 +1,15 @@
 package api.businessController;
 
 import api.daos.DaoFactory;
+import api.dtos.RestauranteBusquedaDto;
 import api.dtos.RestauranteDto;
 import api.entities.Carta;
 import api.entities.Empleado;
 import api.entities.Restaurante;
 import api.exceptions.NotFoundException;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class RestauranteBusinessController {
 
@@ -45,4 +49,12 @@ public class RestauranteBusinessController {
         return new RestauranteDto(DaoFactory.getFactory().getRestauranteDao().read(id)
                 .orElseThrow(() -> new NotFoundException("Restaurante (" + id + ")")));
     }
+
+    public List<RestauranteBusquedaDto> findByNumberOfEmployersGreaterOrEqualsThan(Integer value) {
+        return DaoFactory.getFactory().getRestauranteDao().findAll().stream()
+                .filter(restaurante -> restaurante.getEmpleados().size() >= value)
+                .map(RestauranteBusquedaDto::new)
+                .collect(Collectors.toList());
+    }
+
 }

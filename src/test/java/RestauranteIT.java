@@ -3,6 +3,7 @@ import api.apiControllers.EmpleadoApiController;
 import api.apiControllers.RestauranteApiController;
 import api.dtos.CartaDto;
 import api.dtos.EmpleadoDto;
+import api.dtos.RestauranteBusquedaDto;
 import api.dtos.RestauranteDto;
 import api.entities.Cocina;
 import api.entities.Restaurante;
@@ -12,6 +13,7 @@ import http.HttpResponse;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -100,4 +102,25 @@ class RestauranteIT {
         restauranteDto = this.obtenerRestauranteAPIRest(id);
         assertTrue(restauranteDto.getIdsEmpleados().size() > 0);
     }
+
+    @Test
+    void testBusquedaRestaurantesGrandes() {
+        String nombre = "Restaurante Cinco";
+        String id = this.crearRestauranteAPIRest(nombre, null, Cocina.PIZZERIA, null);
+        this.asignarEmpleadoARestauranteAPIRest(id, "Pepe");
+        this.asignarEmpleadoARestauranteAPIRest(id, "Maria");
+        this.asignarEmpleadoARestauranteAPIRest(id, "Angel");
+        this.asignarEmpleadoARestauranteAPIRest(id, "Luisa");
+        this.asignarEmpleadoARestauranteAPIRest(id, "Elena");
+        this.asignarEmpleadoARestauranteAPIRest(id, "Eva");
+        HttpRequest request = HttpRequest.builder(RestauranteApiController.RESTAURANTES).path(RestauranteApiController.SEARCH)
+                .param("q", "empleados:>=6").get();
+        List<RestauranteBusquedaDto> restauranteBusquedaDtos = (List<RestauranteBusquedaDto>) new Client().submit(request).getBody();
+        assertFalse(restauranteBusquedaDtos.isEmpty());
+        request = HttpRequest.builder(RestauranteApiController.RESTAURANTES).path(RestauranteApiController.SEARCH)
+                .param("q", "empleados:>=15").get();
+        restauranteBusquedaDtos = (List<RestauranteBusquedaDto>) new Client().submit(request).getBody();
+        assertTrue(restauranteBusquedaDtos.isEmpty());
+    }
+
 }

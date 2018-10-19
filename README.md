@@ -105,6 +105,13 @@ Este es el desarrollo de la segunda práctica de Patrones de Diseño, correspond
 - 403 BAD_REQUEST
 - 404 NOT_FOUND
 ---
+### GET /restaurantes/search?q=empleados:>=4
+#### Respuesta
+- 200 OK
+  - `[ {id:String,nombre:String} ]`
+- 403 BAD_REQUEST
+---
+
 ### Tecnologías utilizadas
 * Java
 * Maven

@@ -87,6 +87,8 @@ public class Dispatcher {
             response.setBody(this.cartaApiController.read(request.getPath(1)));
         } else if (request.isEqualsPath(EmpleadoApiController.EMPLEADOS + EmpleadoApiController.ID_ID)) {
             response.setBody(this.empleadoApiController.read(request.getPath(1)));
+        } else if (request.isEqualsPath(RestauranteApiController.RESTAURANTES + RestauranteApiController.SEARCH)) {
+            response.setBody(this.restauranteApiController.find(request.getParams().get("q")));
         } else if (request.isEqualsPath(RestauranteApiController.RESTAURANTES + RestauranteApiController.ID_ID)) {
             response.setBody(this.restauranteApiController.read(request.getPath(1)));
         } else {
