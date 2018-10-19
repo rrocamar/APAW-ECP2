@@ -40,8 +40,6 @@ Este es el desarrollo de la segunda práctica de Patrones de Diseño, correspond
 - 403 BAD_REQUEST
 ---
 ### GET /cartas/{id}
-#### Parámetros del cuerpo
-- `id`: String (**requerido**)
 #### Respuesta
 - 200 OK
   - `nombre`: String
@@ -51,7 +49,6 @@ Este es el desarrollo de la segunda práctica de Patrones de Diseño, correspond
 ---
 ### UPDATE /empleados/{id}
 #### Parámetros del cuerpo
-- `id`: String (**requerido**)
 - `nombre`: String
 - `salario`: double
 #### Respuesta
@@ -61,7 +58,6 @@ Este es el desarrollo de la segunda práctica de Patrones de Diseño, correspond
 ---
 ### PATCH /cartas/{id}
 #### Parámetros del cuerpo
-- `id`: String (**requerido**)
 - `nombre`: String
 - `fechaValidez`: LocalDateTime
 #### Respuesta
@@ -74,14 +70,46 @@ Este es el desarrollo de la segunda práctica de Patrones de Diseño, correspond
 - 200 OK
 ---
 ### GET /empleados/{id}
-#### Parámetros del cuerpo
-- `id`: String (**requerido**)
 #### Respuesta
 - 200 OK
   - `nombre`: String
   - `salario`: double
 - 403 BAD_REQUEST
 - 404 NOT_FOUND
+---
+### POST /restaurantes
+#### Parámetros del cuerpo
+- `nombre`: String (**requerido**)
+- `direccion`: String
+- `tipo`: Cocina
+- `idCarta`: String
+#### Respuesta
+- 200 OK
+  - `id`: String
+- 403 BAD_REQUEST
+- 404 NOT_FOUND
+---
+### POST /restaurantes/{id}/carta
+#### Parámetros del cuerpo
+- `nombre`: String (**requerido**)
+#### Respuesta
+- 200 OK
+- 403 BAD_REQUEST
+- 404 NOT_FOUND
+---
+### POST /restaurantes/{id}/empleado
+#### Parámetros del cuerpo
+- `nombre`: String (**requerido**)
+#### Respuesta
+- 200 OK
+- 403 BAD_REQUEST
+- 404 NOT_FOUND
+---
+### GET /restaurantes/search?q=empleados:>=4
+#### Respuesta
+- 200 OK
+  - `[ {id:String,nombre:String} ]`
+- 403 BAD_REQUEST
 ---
 
 ### Tecnologías utilizadas

@@ -3,12 +3,15 @@ package api.daos.memory;
 import api.daos.CartaDao;
 import api.daos.DaoFactory;
 import api.daos.EmpleadoDao;
+import api.daos.RestauranteDao;
 
 public class DaoMemoryFactory extends DaoFactory {
 
     private EmpleadoDao empleadoDao;
 
     private CartaDao cartaDao;
+
+    private RestauranteDao restauranteDao;
 
     public DaoMemoryFactory() {
     }
@@ -27,5 +30,13 @@ public class DaoMemoryFactory extends DaoFactory {
             this.cartaDao = new CartaDaoMemory();
         }
         return this.cartaDao;
+    }
+
+    @Override
+    public RestauranteDao getRestauranteDao() {
+        if (this.restauranteDao == null) {
+            this.restauranteDao = new RestauranteDaoMemory();
+        }
+        return this.restauranteDao;
     }
 }
